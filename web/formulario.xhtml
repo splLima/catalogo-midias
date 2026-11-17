@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Cadastrar / Editar</title>
+    <style>
+        .ano-pequeno { width: 50px !important; }
+        .sinopse-grande { width: 300px; height: 80px; }
+    </style>
+</h:head>
+<h:body>
+    <h1><h:outputText value="#{catalogoBean.item.id == 0 ? 'Cadastrar Novo Item' : 'Editar Item'}" /></h1>
+    <h:form>
+        <h:messages style="color: red;" /><br/>
+        
+        Título: <h:inputText value="#{catalogoBean.item.titulo}" required="true" requiredMessage="Preencha o Título!" /><br/><br/>
+        
+        Tipo:
+        <h:selectOneMenu value="#{catalogoBean.item.tipo}" required="true" requiredMessage="Selecione o Tipo!">
+            <f:selectItem itemLabel="Selecione..." itemValue="" />
+            <f:selectItem itemLabel="Filme" itemValue="Filme" />
+            <f:selectItem itemLabel="Música" itemValue="Música" />
+            <f:selectItem itemLabel="Livro" itemValue="Livro" />
+        </h:selectOneMenu><br/><br/>
+        
+        Gênero: <h:inputText value="#{catalogoBean.item.genero}" /><br/><br/>
+        
+        Autor: <h:inputText value="#{catalogoBean.item.autor}" required="true" requiredMessage="Preencha o Autor!" /><br/><br/>
+        
+        Ano: <h:inputText value="#{catalogoBean.item.ano}" size="4" maxlength="4" style="width: 50px; text-align: left;" styleClass="ano-pequeno">
+        <f:convertNumber integerOnly="true" />
+        </h:inputText><br/><br/>     
+        
+        Sinopse: <br/>
+        <h:inputTextarea value="#{catalogoBean.item.sinopse}" styleClass="sinopse-grande" /><br/><br/>
+        
+        <h:commandButton value="Salvar" action="#{catalogoBean.salvar()}" />
+        <h:commandButton value="Cancelar" action="index?faces-redirect=true" immediate="true" />
+    </h:form>
+    <br/>
+    <h:link value="Voltar" outcome="index"/>
+</h:body>
+</html>
